@@ -1,0 +1,46 @@
+log:
+  path: ./logs
+  fileName: omega.log
+  level: info
+  jsonFormat: true
+  maxSize: 100
+  maxAge: 15
+  maxBackups: 150
+  compress: false
+  stdout: true
+
+httpServer:
+  pprofPort: 9999
+
+streamNumLimitPerWsConn: 150
+
+exchanges:
+  -
+    name: bn
+    restUrl: https://fapi.binance.com
+    singleStreamUrl: wss://fstream.binance.com/ws/%s
+    combinedStreamsUrl: wss://fstream.binance.com/stream?streams=%s
+    symbolsUrlPath: /fapi/v1/exchangeInfo
+    placeOrderUrlPath: /fapi/v1/order
+    enabled: true
+  -
+    name: okx
+    restUrl: https://www.okx.com
+    apiKey:
+    secretKey:
+    passphrase: 
+    publicStreamUrl: wss://ws.okx.com:8443/ws/v5/public
+    privateStreamUrl: wss://ws.okx.com:8443/ws/v5/private
+    businessStreamUrl: wss://ws.okx.com:8443/ws/v5/business
+    publicStreamChannels: books5, bbo-tbt
+    businessStreamChannels: trades-all
+    symbolsUrlPath: /api/v5/public/instruments?instType=SWAP
+    getPositionsUrlPath: /api/v5/account/positions
+    closePositionUrlPath: /api/v5/trade/close-position
+    setLeverageUrlPath: /api/v5/account/set-leverage
+    placeOrderUrlPath: /api/v5/trade/order
+    getOrderInfoUrlPath: /api/v5/trade/order
+    placeTakeProfitStopLossOrderUrlPath: /api/v5/trade/order-algo
+    enabled: true
+
+symbolNumLimit: 10
